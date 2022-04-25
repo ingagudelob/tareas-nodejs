@@ -29,6 +29,49 @@ class Tareas {
       this._listadoTareas[tarea.id] = tarea;
     });
   }
+
+  listarTareas() {
+    this.arrayTareas.forEach((tarea, index) => {
+      const item = `${index + 1}.`.green;
+      const { desc, fechaCompletadoEn } = tarea;
+      const estado =
+        fechaCompletadoEn !== null ? `Completada`.green : `Pendiente`.red;
+
+      // console.log(
+      //   `${index + 1}.`.green +
+      //     ` ${tarea.desc} :: ` +
+      //     `${
+      //       tarea.fechaCompletadoEn !== null
+      //         ? `Completada`.green
+      //         : `Pendiente`.red
+      //     }`
+      // );
+      console.log(`${item} ` + `${desc} :: ` + `${estado}`);
+    });
+  }
+
+  listarTareasCompletadas(state) {
+    let cont = 0;
+    let cont2 = 0;
+    this.arrayTareas.forEach((tarea, index, tareas) => {
+      const item = `${index + 1}.`.green;
+      const { desc, fechaCompletadoEn } = tarea;
+      const estado =
+        fechaCompletadoEn !== null ? `Completada`.green : `Pendiente`.red;
+
+      if (fechaCompletadoEn !== null) {
+        if (state) {
+          cont += 1;
+          console.log(`${cont}.`.green + `${desc} :: ` + `${estado}`);
+        }
+      } else {
+        if (!state) {
+          cont2 += 1;
+          console.log(`${cont2}.`.green + `${desc} :: ` + `${estado}`);
+        }
+      }
+    });
+  }
 }
 
 module.exports = Tareas;

@@ -25,6 +25,12 @@ const main = async () => {
     tareas.cargarTareasArray(dataTareas);
   }
 
+  const listarTareas = () => {
+    tareas.arrayTareas.map((desc, index) => {
+      console.log(`${index + 1}.`.green + ` ${desc.desc}`);
+    });
+  };
+
   do {
     // Imprimir el menú de opciones
     option = await menuInquirer();
@@ -37,10 +43,20 @@ const main = async () => {
         break;
 
       case "2":
-        console.log(tareas.arrayTareas);
-        tareas.arrayTareas.map((desc) => {
-          console.log(desc.desc);
-        });
+        //console.log(tareas.arrayTareas);
+        tareas.listarTareas();
+        break;
+
+      case "3":
+        // Listar tareas completadas
+        //console.log(tareas.arrayTareas);
+        tareas.listarTareasCompletadas(true);
+        break;
+
+      case "4":
+        // Lista tareas pendientes
+        //console.log(tareas.arrayTareas);
+        tareas.listarTareasCompletadas(false);
         break;
     }
 
