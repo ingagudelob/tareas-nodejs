@@ -58,8 +58,40 @@ const leerInput = async (mensaje) => {
   return desc;
 };
 
+const listadoTareasBorrar = async (tareas = []) => {
+  // preguntas para eliminar una tarea, afectando el choices
+  const choices = tareas.map((tarea, i) => {
+    const index = `${i + 1}.`.green;
+
+    return {
+      value: tarea.id,
+      name: `${index} ${tarea.desc}`,
+    };
+  });
+
+  const preguntasBorrar = [
+    {
+      type: "list",
+      name: "tarea",
+      message: "Borra",
+      choices,
+    },
+  ];
+  const { tarea } = await inquirer.prompt(preguntasBorrar);
+  return tarea;
+};
+
+const confirmarBorrar = async (message) => {
+  const confBorrar = [{ type: "confirm", name: "ok", message }];
+
+  const { ok } = await inquirer.prompt(confBorrar);
+  return ok;
+};
+
 module.exports = {
   menuInquirer,
   pausa,
   leerInput,
+  listadoTareasBorrar,
+  confirmarBorrar,
 };

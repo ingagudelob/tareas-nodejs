@@ -72,6 +72,13 @@ class Tareas {
       }
     });
   }
+
+  borrarTarea(id = "") {
+    // El proposito es eliminar una propiedad del objeto literal
+    if (this._listadoTareas[id]) {
+      delete this._listadoTareas[id];
+    }
+  }
 }
 
 module.exports = Tareas;

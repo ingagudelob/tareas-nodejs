@@ -1,6 +1,12 @@
 const { getGuardar } = require("./helpers/getGuardar");
 const { getLeerTareas } = require("./helpers/getLeerTareas");
-const { menuInquirer, pausa, leerInput } = require("./helpers/menu");
+const {
+  menuInquirer,
+  pausa,
+  leerInput,
+  listadoTareasBorrar,
+  confirmarBorrar,
+} = require("./helpers/menu");
 const Tareas = require("./models/tareas");
 
 require("colors");
@@ -57,6 +63,21 @@ const main = async () => {
         // Lista tareas pendientes
         //console.log(tareas.arrayTareas);
         tareas.listarTareasCompletadas(false);
+        break;
+
+      case "5":
+        break;
+
+      case "6":
+        // Borrar tarea
+        // Es await porque toca esperar que la tarea termine para dibujar
+        const id = await listadoTareasBorrar(tareas.arrayTareas);
+        const ok = await confirmarBorrar("¿Estás seguro?");
+        if (ok) {
+          tareas.borrarTarea(id);
+          console.log(`¡Tarea "${id}" borrada correctamente!`);
+        }
+
         break;
     }
 
